@@ -22,7 +22,8 @@ function drawWorld(){
     for(var row = 0; row < world.length; row++){
         output += "<div class = 'row'></div>"
         for(var x = 0; x < world[row].length; x++){
-            output += "<div class = '" + worldDict[world[row][x]] +"'></div>"
+            output += "<div class = '" + worldDict[
+                world[row][x]] +"'></div>"
         }
         output = "</div>"
     }
@@ -35,11 +36,9 @@ drawWorld();{
         x:1,
         y:6
     }
-
-
-
     function drawNinjaman(){
-        document.getElementById('ninjaman').style.top = 40 + 'px'
+        document.getElementById('ninjaman').style.top =
+        ninjaman.x * 40 + 'px'
         document.getElementById('ninjaman').style.left = 40 + 'px'
     }
 }
