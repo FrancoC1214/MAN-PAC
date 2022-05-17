@@ -1,21 +1,22 @@
 
 var world = [
-    [1,1,1,1,1],
-    [1,0,2,2,1],
-    [1,2,1,2,1],
-    [1,2,2,2,1],
-    [1,2,2,2,1],
-    [1,2,1,2,1],
-    [1,2,2,2,1],
-    [1,2,2,2,1],
-    [1,2,1,2,1],
-    [1,2,2,2,1],
-    [1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1],
+    [1,2,2,2,2,2,2,2,2,1,1],
+    [1,2,1,1,2,1,1,1,2,1,1],
+    [1,2,1,1,2,2,2,2,2,2,1],
+    [1,2,2,2,2,1,1,2,1,2,1],
+    [1,1,1,2,2,2,2,2,2,2,1],
+    [1,1,2,2,1,2,1,1,2,1,1],
+    [1,2,2,1,1,2,1,2,2,2,1],
+    [1,2,1,2,2,2,2,2,1,2,1],
+    [1,2,2,2,1,1,1,2,2,2,1],
+    [1,1,1,1,1,1,1,1,1,1,1],
 ];
 var worldDict = {
     0: "blank",
     1: "wall",
-    2: "sushi"
+    2: "sushi",
+    3: "Onigiri"
 }
 function drawWorld(){
     output = "";
@@ -33,8 +34,8 @@ function drawWorld(){
 drawWorld();
 
 var ninjaman = {
-    x: 2,
-    y: 6
+    x: 1,
+    y: 9
 }
 
 function drawNinjaman(){
@@ -66,4 +67,10 @@ document.onkeydown = function(e){
     }
     world[ninjaman.y][ninjaman.x] = 0;
     drawNinjaman()
+    drawWorld()
+}
+
+function drawScore(){
+    var scoreText = "Score" + score
+    ctx.font = "16px Arial"
 }

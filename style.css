@@ -40,3 +40,12 @@
     background-size: contain;
     position: absolute;
 }
+.onigiri
+{
+    background-color: rgb(50, 5, 95);
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url(img/sushi.png);
+    background-size: contain;
+}
