@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NinjaMan</title>
+    <style type="text/css">
+
+        *{
+    margin: 0px;
+    padding: 0px;
+        }
+        .row {
+    line-height:0 ;
+        }
+        .wall {
+    background-color:rgb(0, 255, 225);
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+        }
+        .sushi {
+    background-color:rgb(0, 0, 0);
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url('img/sushi.png');
+    background-size: contain;
+        }
+        .onigiri {
+    background-color:rgb(0, 0, 0);
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url('img/onigiri.png');
+    background-size: contain;
+        }
+        .blank {
+    background-color:black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+        }
+        #enemy1 {
+    background-color:black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url('img/red.gif');
+    background-size: contain;
+    position: absolute;
+    left: 40px;
+    top: 40px;
+        }
+        #enemy2 {
+    background-color:black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url('img/pinky.gif');
+    background-size: contain;
+    position: absolute;
+    left: 40px;
+    top: 40px;
+        }
+        #enemy3 {
+    background-color:black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url('img/bluey.gif');
+    background-size: contain;
+    position: absolute;
+    left: 40px;
+    top: 40px;
+        }
+        #ninjaman {
+    background-color:black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url('img/ninja.gif');
+    background-size: contain;
+    position: absolute;
+    left: 40px;
+    top: 40px;
+        }
+     
+     
+    </style>
+
+</head>
+<body>
+
+    <div id="world"> </div>
+<div id="ninjaman"></div>
+<div id="enemy1"></div>
+<div id="enemy2"></div>
+<div id="enemy3"></div>
+<div><h1 id="title">Score: 0</h1></div>
+<div><h1 id="lives">Lives: 3</h1></div>
+
+<script type="text/javascript">
+
+function random(max,min){
+      return Math.floor(Math.random()* (max-min +1))+min;
+      }
+
+var world = [
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 0, random(1, 4), random(-1, 4), random(1, 4), random(-1, 4), random(-1, 4), random(1, 4), random(-1, 4), random(1, 4), 1],
+            [1, random(1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(1, 4), 1],
+            [1, random(1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(1, 4), 1],
+            [1, random(1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(1, 4), 1],
+            [1, random(1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(1, 4), 1],
+            [1, random(1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(1, 4), 1],
+            [1, random(1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), 0, 1],
+            [1, random(1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(-1, 4), random(1, 4), 1],
+            [1, random(1, 4), random(1, 4), random(-1, 4), random(-1, 4), random(1, 4), random(-1, 4), random(1, 4), random(-1, 4), random(1, 4), 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+
+        ];
+
+var worldDict = {
+    0: 'blank',
+    1: 'wall',
+    2: 'sushi',
+    3: 'onigiri',
+}
+
+
+function drawWorld() {
+    output = "";
+    for(var row = 0; row<world.length; row++) {
+        output += "<div class = 'row'>"
+        for (var x= 0; x < world[row].length; x++){
+            output += "<div class = '" + worldDict[world[row][x]] + "'></div>"
+        }
+        output += "</div>"
+    }
+    document.getElementById('world').innerHTML = output;
+}
+drawWorld();
+
+
+var ninjaman = {
+    x: 1,
+    y: 1
+}
+
+var enemy1 = {  //red
+    x: 9,
+    y: 9
+} 
+var enemy2 = { //pink
+    x: 4,
+    y: 9
+} 
+var enemy3 = { //blue
+    x: 9,
+    y: 3
+} 
+var score = 0;
+
+var lives = 3;
+
+function drawNinjaman() {
+    document.getElementById("ninjaman").style.top = ninjaman.y * 40 + 'px'
+    document.getElementById("ninjaman").style.left = ninjaman.x * 40 + 'px'
+}
+drawNinjaman()
+
+function drawenemy1() {
+    document.getElementById("enemy1").style.top = enemy1.y * 40 + 'px'
+    document.getElementById("enemy1").style.left = enemy1.x * 40 + 'px'
+}
+drawenemy1()
+
+function drawenemy2() {
+    document.getElementById("enemy2").style.top = enemy2.y * 40 + 'px'
+    document.getElementById("enemy2").style.left = enemy2.x * 40 + 'px'
+}
+drawenemy2()
+
+function drawenemy3() {
+    document.getElementById("enemy3").style.top = enemy3.y * 40 + 'px'
+    document.getElementById("enemy3").style.left = enemy3.x * 40 + 'px'
+}
+drawenemy3()
+
+document.onkeydown = function(e) {  // movement of ninja
+    if(e.keyCode == 37){ //left
+        if(world[ninjaman.y][ninjaman.x - 1] !=1){
+            ninjaman.x--;
+            enemy1.x++
+            enemy3.x++
+            
+        }
+    }
+    if(e.keyCode == 39){ //right
+        if(world[ninjaman.y][ninjaman.x + 1] !=1){
+            ninjaman.x++;
+            enemy1.x--
+            enemy3.x--
+        }
+    }
+    if(e.keyCode == 40){ //down
+        if(world[ninjaman.y + 1][ninjaman.x] !=1){
+            ninjaman.y++;
+            enemy1.y--
+            enemy2.y--
+            enemy3.y++
+        }
+    }
+    if(e.keyCode == 38){ //up
+        if(world[ninjaman.y - 1][ninjaman.x] !=1){
+            ninjaman.y--;
+            enemy1.y++
+            enemy2.y++
+            enemy3.y--
+        }
+    }
+    if (world[ninjaman.y][ninjaman.x] === 2) {  // update score of sushi
+                world[ninjaman.y][ninjaman.x] = 0;
+
+                score = score + 10
+                document.getElementById('title').innerHTML = "Record" + score;
+            } else if (world[ninjaman.y][ninjaman.x] === 3) { //update score of onigiri
+                world[ninjaman.y][ninjaman.x] = 0;
+
+                score = score + 5
+                document.getElementById('title').innerHTML = "Record " + score;
+            } if ((ninjaman.x === enemy1.x) && (ninjaman.y === enemy1.y) || (ninjaman.x === enemy2.x) && (ninjaman.y === enemy2.y) || (ninjaman.x === enemy3.x) && (ninjaman.y === enemy3.y)) {  //update score of ghost
+                lives = lives - 1
+                document.getElementById('lives').innerHTML = "Vidas " + lives;
+            } else if (lives === 0) {
+                document.write("Game over! tu Record es " + score + ". actualiza para volver a empesar.")
+            }       
+
+    drawNinjaman();
+    drawWorld();
+    drawenemy1();
+    drawenemy2();
+    drawenemy3();
+
+}
+    
+
+</script>
+
+</body>
+</html>
